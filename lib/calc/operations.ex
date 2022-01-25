@@ -1,4 +1,6 @@
 defmodule Operations do
+
+  def operate(nil), do: nil
   def operate(params) do
     result =
       case params["operator"] do

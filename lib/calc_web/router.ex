@@ -19,7 +19,7 @@ defmodule CalcWeb.Router do
 
     get "/", PageController, :index
 
-    post "/", PageController, :index
+    post "/", PageController, :calculate
   end
 
   # Other scopes may use custom stacks.
