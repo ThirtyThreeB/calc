@@ -1,17 +1,16 @@
 defmodule CalcWeb.PageController do
   use CalcWeb, :controller
 
-  def index(conn, params) do
+  def index(conn, _params) do
 
-    if (params |> is_nil()) do
-      conn
-      |> put_flash(:info, "")
-      |> render("index.html")
-    else
-      result = Operations.operate(params)
-      conn
-      |> render("index.html", result: result, params: params)
-    end
+    conn
+    |> render("index.html", result: nil)
+  end
 
+  def calculate(conn, params) do
+    result = Operations.operate(params)
+
+    conn
+    |> render("index.html", result: result, params: params)
   end
 end

@@ -1,34 +1,26 @@
-
 <div class="card mt-5" style="width: 48rem;">
   <div class="card-body">
     <h5 class="card-title mb-4">Craptacular Calculator</h5>
-    <form>
-      <div class="row">
-        <div class="col">
-          <input type="number" class="form-control" name="firstNumber" placeholder="First number">
-        </div>
-        <div class="col-auto my-1">
-          <label class="mr-sm-2" for="inlineFormCustomSelect">Operator</label>
-          <select class="custom-select mr-sm-2" name="operator" id="inlineFormCustomSelect">
-            <option selected>Choose...</option>
-            <option name="addition">+</option>
-            <option name="subtraction">-</option>
-            <option name="multiplication">*</option>
-            <option name="division">/</option>
-          </select>
-        </div>
-        <div class="col">
-          <input type="number" class="form-control" name="secondNumber" placeholder="Second number">
-        </div>
-        <button type="submit" class="col btn btn-primary">Submit</button>
+    <%= form_for @conn, Routes.page_path(@conn, :index), fn f -> %>
+    <div class="row">
+      <div class="col-auto">
+        <%= number_input f, :firstNumber, class: " form-control" %>
       </div>
-    </form>
-  </div>
-  <%= if @result do%>
-    <div class="card-body">
-      <%= @params["firstNumber"]%>
-      <%= @params["operator"]%>
-      <%= @params["secondNumber"]%>=<%= @result%>
+      <div class="col-auto">
+        <%= select(f, :operator, ["+": "+", "-": "-", "*": "*", "/": "/"], class: "custom-select mr-sm-2") %>
+      </div>
+      <div class="col-auto">
+        <%= number_input f, :secondNumber, class: "form-control" %>
+      </div>
     </div>
+    <%= submit "Calculate!!", class: "col btn btn-primary mt-4" %>
   <% end %>
+</div>
+<%= if @result do%>
+  <div class="card-body">
+    <%= @params["firstNumber"]%>
+    <%= @params["operator"]%>
+    <%= @params["secondNumber"]%>=<%= @result%>
+  </div>
+<% end %>
 </div>
